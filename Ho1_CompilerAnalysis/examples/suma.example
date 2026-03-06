@@ -1,0 +1,6 @@
+start
+move ax, 6
+mov bl, 3
+add ax, bl
+sto #15
+end
