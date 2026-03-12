@@ -1,16 +1,25 @@
-#ifndef INSTRUCCION_H
-#define INSTRUCCION_H
+#ifndef INSTRUCCION_HPP
+#define INSTRUCCION_HPP
 
-class instruction
+#include <string>
+
+using std::string;
+
+class Instruccion
 {
-private:
-    /* data */
-public:
-    instruction(/* args */);
+    private:
+        string nombre;
+        int codigo;
+
+    public:
+        Instruccion(string _nombre, int _codigo);
+
 };
 
-instruction::instruction(/* args */)
+Instruccion::Instruccion(string _nombre, int _codigo)
 {
+    nombre = _nombre;
+    codigo = _codigo;
 }
 
 
