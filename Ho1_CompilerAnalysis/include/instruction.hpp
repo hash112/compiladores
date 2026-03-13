@@ -1,26 +1,24 @@
-#ifndef INSTRUCCION_HPP
-#define INSTRUCCION_HPP
+#ifndef INSTRUCCION_H
+#define INSTRUCCION_H
 
 #include <string>
-
 using std::string;
-
 class Instruccion
 {
     private:
-        string nombre;
         int codigo;
-
+        string nombre;
+        string parametros;
+        
     public:
-        Instruccion(string _nombre, int _codigo);
-
+        Instruccion(int _codigo, string _nombre, string _parametros);
 };
 
-Instruccion::Instruccion(string _nombre, int _codigo)
+Instruccion::Instruccion(int _codigo, string _nombre, string _parametros)
 {
-    nombre = _nombre;
     codigo = _codigo;
+    nombre = _nombre;
+    parametros = _parametros;
 }
-
 
 #endif
