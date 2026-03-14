@@ -14,11 +14,4 @@ class Instruccion
         Instruccion(int _codigo, string _nombre, string _parametros);
 };
 
-Instruccion::Instruccion(int _codigo, string _nombre, string _parametros)
-{
-    codigo = _codigo;
-    nombre = _nombre;
-    parametros = _parametros;
-}
-
 #endif

@@ -9,34 +9,37 @@
 
 using std::cout, std::string;
 
+struct Parametro
+{
+    string nombre;
+    int valor;
+};
+
+struct Memoria
+{
+    Instruccion *valor;
+};
+
+struct Registro
+{
+    string nombre;
+    int valor;
+};
+
 class ControlUnit
 {
     private:
-        Instruccion mbr, ir;
-        Programa *programa;
-        string nombre;
-        int codigo;
-        int parametros[5];
-        int pc = 0;
+        
+        Instruccion *ir;
+        Memoria memoria[256];
+        Registro registros[4];
 
     public:
-        ControlUnit(Programa *_programa);
+        ControlUnit(Programa *programa);
         void fetch(int mar);
+        void decode();
+        void execute();
 };
 
-ControlUnit::ControlUnit(Programa *_programa)
-{
-    programa = _programa;
-    while(pc != NULL)
-    {
-        fetch(pc);
-    }
-}
-
-void ControlUnit::fetch(int mar)
-{
-    Instruccion *instruccion = static_cast<Instruccion*>(programa->getInstruccion(mar));
-    cout << "Fetch de instrucción: " <<
-}
 
 #endif

@@ -15,19 +15,7 @@ class Programa
         Programa();
         void addInstruccion(int codigo, string nombre, string parametros);
         Instruccion *getInstruccion(int direccion);
+        int getSize();
 };
-
-Programa::Programa(){}
-
-void Programa::addInstruccion(int codigo, string nombre, string parametros)
-{
-    Instruccion instruccion(codigo, nombre, parametros);
-    programa.push_back(instruccion);
-}
-
-Instruccion *Programa::getInstruccion(int direccion)
-{
-    return &programa[direccion];
-}
 
 #endif
