@@ -7,17 +7,17 @@
 #include <iostream>
 #include <string>
 
-using std::cout, std::string;
+using std::cout; using std::string;
 
 struct Parametro
 {
     string nombre;
-    int valor;
 };
 
 struct Memoria
 {
     Instruccion *valor;
+    int valor_entero;
 };
 
 struct Registro
@@ -29,17 +29,45 @@ struct Registro
 class ControlUnit
 {
     private:
-        
-        Instruccion *ir;
+        // Memoria de instrucciones 
         Memoria memoria[256];
         Registro registros[4];
+        
+        // Registros internos
+        int pc;
+        int acc;
+        Instruccion *ir;
+        Memoria *mbr;
+
+        string parametro1;
+        string parametro2;
+
+        char tipoParametro1;
+        char tipoParametro2;
 
     public:
+        // Constructor que recibe un programa para cargarlo en memoria
         ControlUnit(Programa *programa);
+
+        // Función principal que ejecuta el programa cargado en memoria
+        void run();
         void fetch(int mar);
         void decode();
-        void execute();
-};
+        int execute();
 
+        // Se encarga de validar el tipo de parámetro (registro, memoria o inmediato)
+        char validarParametro(string parametro);
+
+        Registro* getRegistro(string nombre);
+        Memoria* getMemoria(int direccion);
+
+        template<typename T> T parseParametro(char tipo, string parametro);
+
+        // Funciones para ejecutar instrucciones específicas
+        void mov(Registro &destino, Memoria &origen);
+        void mov(Registro &destino, Registro &origen);
+        void mov(Registro &destino, int valor);
+        void store(Memoria &destino);
+};
 
 #endif
