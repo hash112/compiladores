@@ -1,25 +1,65 @@
-#include "include/cu.hpp"
-#include "include/instruction.hpp"
-#include "include/programa.hpp"
+#include <iostream>
+#include <string>
 
-void crear_instrucciones(Programa *programa)
-{
-    programa->addInstruccion(1, "START");
-    programa->addInstruccion(2, "MOV", "eax", "20");
-    programa->addInstruccion(2, "MOV", "ebx", "70");
-    programa->addInstruccion(3, "ADD", "eax", "ebx");
-    programa->addInstruccion(4, "STORE", "#15");
-    programa->addInstruccion(2, "MOV", "ecx", "#15");
-    programa->addInstruccion(5, "END");
-}
+#include "../include/automata.hpp"
+#include "../include/regex.hpp"
+#include "../include/patron.hpp"
 
-int main() 
+using std::cin; using std::cout; using std::endl; using std::string;
+using std::getline;
+
+int main(int argc, char *argv[])
 {
-    Programa programa;
-    crear_instrucciones(&programa);
-    ControlUnit cu(&programa);
-    cu.run();
-    cu.printRegistros();
-    cu.printMemoria(0, 20);
+    int opcion;
+    string input;
+
+    Patron *patron;
+    Regex *regex;
+
+    do {
+        cout << "==========================================" << endl;
+        cout << " Autómata Finito Determinista (AFD)" << endl;
+        cout << " 1. Validar cadena alfabética [A-Za-z]+" << endl;
+        cout << " 2. Validar cadena numérica [0-9]+" << endl;
+        cout << " 3. Salir" << endl;
+        cout << "==========================================" << endl;
+        cout << "Elige una opción: ";
+        cin >> opcion;
+        cin.ignore();
+
+        if(opcion == 1)
+        {
+            patron = new Patron("[A-Za-z]+");
+            regex = new Alfabeto(patron);
+            cout << "Ingresa una cadena alfabética: ";
+        }
+
+        else if(opcion == 2)
+        {
+            patron = new Patron("[0-9]+");
+            regex = new Numeros(patron);
+            cout << "Ingresa una cadena numérica: ";
+        }
+
+        else if(opcion == 3) break;
+        else continue;
+
+        Automata *automata = new Automata(regex);
+        getline(cin, input);
+
+        if(automata->procesar(input))
+        {
+            cout << "Resultado: ACEPTADO" << endl;
+        }
+        else
+        {
+            cout << "Resultado: RECHAZADO" << endl;
+        }
+
+        cout << "Estado final: q" << automata->get_estado_actual() << endl << endl;
+        delete automata;
+
+    } while(opcion != 3);
+
     return 0;
 }

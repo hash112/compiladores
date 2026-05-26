@@ -8,7 +8,7 @@ CXXFLAGS ?= $(RELEASE_FLAGS)
 # Project structure
 SRC_DIR := src
 BUILD_DIR := build
-TARGET := compiler_analysis
+TARGET := lexical_analysis
 
 SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
