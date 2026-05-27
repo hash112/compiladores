@@ -3,6 +3,7 @@
 !*/
 !Makefile
 
+*.pdf
 stuff/
 new-vm-main/
 build/
